@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtualenv
+.venv/
+
+# IDEs
+.vscode/
+
+# Test / cache
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+# Databases / stores
+*.sqlite
+vectorstore/
+data/raw/
