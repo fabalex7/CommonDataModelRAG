@@ -15,5 +15,5 @@ __pycache__/
 
 # Databases / stores
 *.sqlite
-vectorstore/
+chroma_db/
 data/raw/
