@@ -1,0 +1,6 @@
+chromadb
+ollama
+fastapi
+uvicorn
+pydantic
+pytest
