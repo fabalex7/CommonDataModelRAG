@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 
@@ -8,21 +9,45 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from app.parser import flatten_cdm
 
+
 DATA_PATH = PROJECT_ROOT / "data" / "raw"
+
+CHROMA_PATH = Path(
+    os.getenv(
+        "CHROMA_PATH",
+        str(PROJECT_ROOT / "chroma_db")
+    )
+)
+
 
 def ingest_cdm(path):
     documents = []
+
     for json_path in Path(path).rglob("*.json"):
         chunks = flatten_cdm(json_path)
-        print(f"Ingested {len(chunks)} chunks from {json_path}")
+
+        print(
+            f"Ingested {len(chunks)} chunks from {json_path}"
+        )
+
         documents.extend(chunks)
-    print(f"Ingested {len(documents)} documents from {path}")
+
+    print(
+        f"Ingested {len(documents)} documents from {path}"
+    )
+
     return documents
+
 
 documents = ingest_cdm(DATA_PATH)
 
-chroma_client = chromadb.PersistentClient(path="./chroma_db")
-collection = chroma_client.get_or_create_collection(name="data_model_rag")
+chroma_client = chromadb.PersistentClient(
+    path=str(CHROMA_PATH)
+)
+
+collection = chroma_client.get_or_create_collection(
+    name="data_model_rag"
+)
 
 for index, doc in enumerate(documents):
     collection.add(
