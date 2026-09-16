@@ -5,28 +5,30 @@ from ollama import Client
 
 
 class RAGPipeline:
-    def __init__(self):
-        chroma_path = os.getenv(
-            "CHROMA_PATH",
-            "./chroma_db"
-        )
+    def __init__(self, collection=None, ollama_client=None):
+        if collection is None:
+            chroma_path = os.getenv("CHROMA_PATH", "./chroma_db")
 
-        ollama_host = os.getenv(
-            "OLLAMA_HOST",
-            "http://localhost:11434"
-        )
+            chroma_client = chromadb.PersistentClient(
+                path=chroma_path
+            )
 
-        self.chroma_client = chromadb.PersistentClient(
-            path=chroma_path
-        )
+            collection = chroma_client.get_or_create_collection(
+                name="data_model_rag"
+            )
 
-        self.collection = self.chroma_client.get_or_create_collection(
-            name="data_model_rag"
-        )
+        self.collection = collection
 
-        self.ollama_client = Client(
-            host=ollama_host
-        )
+        if ollama_client is None:
+            ollama_host = os.getenv(
+                "OLLAMA_HOST",
+                "http://localhost:11434",
+            )
+
+            ollama_client = Client(host=ollama_host)
+
+        self.ollama_client = ollama_client
+
 
     def retrieve_context(self, question: str):
 
