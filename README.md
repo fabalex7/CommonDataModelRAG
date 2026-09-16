@@ -21,7 +21,7 @@ A FastAPI-based Retrieval-Augmented Generation (RAG) service for querying the Mi
 
 - FastAPI
 - ChromaDB
-- Snetence Transofrmer Embeddings
+- Sentence Transformer Embeddings
 - LLama3
 - Pytest
 - Docker
