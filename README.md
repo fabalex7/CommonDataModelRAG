@@ -7,12 +7,9 @@ A FastAPI-based Retrieval-Augmented Generation (RAG) service for querying the Mi
 - Parses Microsoft CDM Banking Model schemas
 - Stores entity definitions in a vector database (ChromaDB)
 - Natural language Q&A over CDM entities, attributes, and relationships
-- Relationship-aware retrieval to improve answer quality
 - FastAPI REST API
 - Unit tests for retrieval logic
 - Dockerized deployment
-
- 
 
 ## Example Questions
 
