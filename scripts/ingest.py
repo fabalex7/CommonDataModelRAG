@@ -1,14 +1,10 @@
 import os
-import sys
 from pathlib import Path
-
 import chromadb
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(PROJECT_ROOT))
 
 from app.parser import flatten_cdm
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 DATA_PATH = PROJECT_ROOT / "data" / "raw"
 
